@@ -45,13 +45,14 @@ const double tooCloseLabelThresholdM = 0.4;
 
 const int inputSize = 640;
 
-/// Per-COCO-id minimum confidence (YOLO class logits/probabilities).
-/// Vehicles use a lower floor for rear / low-light views; person stays tighter.
+/// Per-COCO-id minimum confidence.
+/// Raised from 0.12 → 0.40 to eliminate low-confidence false positives
+/// (random objects hitting 13–33 % on YOLOv8n-nano noise floor).
 const Map<int, double> classConfThresholds = {
-  0: 0.18, // person
-  2: 0.12, // car
-  3: 0.12, // motorcycle
-  5: 0.12, // bus
-  7: 0.12, // truck
+  0: 0.40, // person
+  2: 0.40, // car
+  3: 0.40, // motorcycle
+  5: 0.40, // bus
+  7: 0.40, // truck
 };
-const double defaultConfThreshold = 0.12;
+const double defaultConfThreshold = 0.40;
